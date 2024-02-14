@@ -9,8 +9,7 @@ type ProductListItemType = {
     }
 }
 
-export default function ProductListItem(props: ProductListItemType) {
-    const { product } = props;
+export default function ProductListItem({ product }: ProductListItemType) {
     return (
         <View className='bg-stone-200 p-2 rounded-md'>
             <Image source={{ uri: product.image }} style={styles.image} />
