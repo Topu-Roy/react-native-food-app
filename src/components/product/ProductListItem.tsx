@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 
-type ProductType = {
+type ProductListItemType = {
     product: {
         id: number;
         name: string;
@@ -9,7 +9,7 @@ type ProductType = {
     }
 }
 
-export default function ProductCard(props: ProductType) {
+export default function ProductListItem(props: ProductListItemType) {
     const { product } = props;
     return (
         <View className='bg-stone-200 p-2 rounded-md'>

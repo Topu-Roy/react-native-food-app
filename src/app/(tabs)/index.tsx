@@ -1,13 +1,13 @@
-import { Image, StyleSheet, Text, View, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import products from '@/assets/data/products';
-import ProductCard from '@/src/components/product/ProductCard';
+import ProductListItem from '@/src/components/product/ProductListItem';
 
 export default function TabOneScreen() {
   return (
     <ScrollView>
-      <ProductCard product={products[0]} />
-      <ProductCard product={products[1]} />
-      <ProductCard product={products[2]} />
+      <ProductListItem product={products[0]} />
+      <ProductListItem product={products[1]} />
+      <ProductListItem product={products[2]} />
     </ScrollView>
   );
 }
