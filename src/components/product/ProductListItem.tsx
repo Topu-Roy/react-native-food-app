@@ -13,9 +13,9 @@ export const defaultImage = "https://notjustdev-dummy.s3.us-east-2.amazonaws.com
 
 export default function ProductListItem({ product }: ProductListItemType) {
     return (
-        <View className='bg-stone-200 p-2 rounded-md'>
+        <View className='flex-1 bg-white dark:bg-neutral-900/95 p-2 rounded-md m-1'>
             <Image source={{ uri: product.image || defaultImage }} style={styles.image} />
-            <Text className='text-base font-bold' >{product.name}</Text>
+            <Text className='text-base font-bold dark:text-white' >{product.name}</Text>
             <Text className='font-semibold text-blue-700 dark:text-blue-400'>${product.price}</Text>
         </View>
     )
