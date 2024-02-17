@@ -20,7 +20,7 @@ const ProductDetailsScreen = () => {
     }
 
     return (
-        <View className='px-2 flex-1 justify-between bg-white'>
+        <View className='px-2 flex-1 bg-white'>
             <Stack.Screen options={{ title: product.name }} />
 
             <View>
@@ -33,12 +33,14 @@ const ProductDetailsScreen = () => {
                             key={size} className='h-14 w-14 rounded-full justify-center items-center'
                             style={{ backgroundColor: size == sizeState ? "gainsboro" : "white" }}
                         >
-                            <Text className='justify-center items-center text-lg font-medium'>{size}</Text>
+                            <Text className='justify-center items-center text-lg font-medium'
+                                style={{ color: size == sizeState ? "black" : "gray" }}
+                            >{size}</Text>
                         </Pressable>
                     ))}
                 </View>
             </View>
-            <View className='justify-end pb-4 gap-4'>
+            <View className='justify-end pb-4 gap-4 mt-auto'>
                 <View className='justify-start items-start flex-row gap-2'>
                     <Text className='text-xl font-medium text-slate-700'>Price</Text>
                     <Text className='text-2xl font-extrabold text-blue-700'>${product.price}</Text>
