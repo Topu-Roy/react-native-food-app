@@ -14,7 +14,16 @@ export const cartContext = createContext<CartType>({
 export default function CartProvider({ children }: PropsWithChildren) {
     const [items, setItems] = useState<CartItemType[]>([])
     const addItem = (item: Product, size: CartItemType['size']) => {
-        console.log(item, "size: " + size)
+        const newCartItem: CartItemType = {
+            id: '1',
+            product: item,
+            product_id: item.id,
+            size,
+            quantity: 1
+        }
+
+        setItems([newCartItem, ...items])
+        console.log(items)
     }
     return (
         <cartContext.Provider value={{ items, addItem }}>
