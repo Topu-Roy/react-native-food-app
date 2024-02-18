@@ -1,10 +1,10 @@
 import { PropsWithChildren, createContext, useContext, useState } from "react";
-import { CartItemType } from "../types/types";
+import { CartItemType, Product } from "../types/types";
 
 
 type CartType = {
     items: CartItemType[],
-    addItem: (item: CartItemType, size: CartItemType['size']) => void;
+    addItem: (item: Product, size: CartItemType['size']) => void;
 }
 export const cartContext = createContext<CartType>({
     items: [],
@@ -13,7 +13,9 @@ export const cartContext = createContext<CartType>({
 
 export default function CartProvider({ children }: PropsWithChildren) {
     const [items, setItems] = useState<CartItemType[]>([])
-    const addItem = () => { }
+    const addItem = (item: Product, size: CartItemType['size']) => {
+        console.log(item, "size: " + size)
+    }
     return (
         <cartContext.Provider value={{ items, addItem }}>
             {children}

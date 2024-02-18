@@ -1,15 +1,19 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import { Stack, useLocalSearchParams } from 'expo-router'
 import products from '@/assets/data/products';
 import { defaultImage } from '@/src/components/product/ProductListItem';
+import { PizzaSizes, Product } from '@/src/types/types';
+import { useCart } from '@/src/provider/CartProvider';
 
 const ProductDetailsScreen = () => {
     const { id } = useLocalSearchParams();
-    const product = products.find(p => p.id.toString() === id)
-    const sizes = ["S", "M", "L", "XL"];
+    const sizes: PizzaSizes[] = ["S", "M", "L", "XL"];
+    const { addItem } = useCart();
 
-    const [sizeState, setSizeState] = useState('M')
+    const product = products.find(p => p.id.toString() === id)
+
+    const [selectedSize, setSelectedSize] = useState<PizzaSizes>('M')
 
     if (!product) {
         return (
@@ -17,6 +21,10 @@ const ProductDetailsScreen = () => {
                 <Text className='font-semibold text-lg'>Product not found</Text>
             </View>
         )
+    }
+
+    function addToCart(product: Product, size: PizzaSizes) {
+        addItem(product, size)
     }
 
     return (
@@ -29,12 +37,12 @@ const ProductDetailsScreen = () => {
                 <View className='justify-around items-center flex-row '>
                     {sizes.map(size => (
                         <Pressable
-                            onPress={() => setSizeState(size)}
+                            onPress={() => setSelectedSize(size)}
                             key={size} className='h-14 w-14 rounded-full justify-center items-center'
-                            style={{ backgroundColor: size == sizeState ? "gainsboro" : "white" }}
+                            style={{ backgroundColor: size == selectedSize ? "gainsboro" : "white" }}
                         >
                             <Text className='justify-center items-center text-lg font-medium'
-                                style={{ color: size == sizeState ? "black" : "gray" }}
+                                style={{ color: size == selectedSize ? "black" : "gray" }}
                             >{size}</Text>
                         </Pressable>
                     ))}
@@ -45,7 +53,10 @@ const ProductDetailsScreen = () => {
                     <Text className='text-xl font-medium text-slate-700'>Price</Text>
                     <Text className='text-2xl font-extrabold text-blue-700'>${product.price}</Text>
                 </View>
-                <Pressable className='justify-center items-center h-14 bg-teal-400 rounded-full'>
+                <Pressable
+                    onPress={() => addItem(product, selectedSize)}
+                    className='justify-center items-center h-14 bg-teal-400 rounded-full'
+                >
                     <Text className='text-lg font-medium'>
                         Add to cart
                     </Text>
