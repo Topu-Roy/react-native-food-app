@@ -1,18 +1,11 @@
 import React from "react";
-import {
-    View,
-    Text,
-    Platform,
-    Pressable,
-    Image,
-    StyleSheet,
-    FlatList,
-} from "react-native";
+import { View, FlatList, Platform, Image, Text, StyleSheet } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useCart } from "../provider/CartProvider";
 import { Stack } from "expo-router";
 import { CartItemType } from "../types/types";
 import { defaultImage } from "../components/product/ProductListItem";
+import { FontAwesome } from "@expo/vector-icons";
 
 type CartListItemPropsType = {
     item: CartItemType;
@@ -35,14 +28,20 @@ const CartListItem = ({ item }: CartListItemPropsType) => {
                     <Text className="text-lg font-medium">Size: ({item.size})</Text>
                 </View>
             </View>
-            <View className="flex-row justify-center items-center gap-2">
-                <Pressable className="justify-center items-center rounded-full h-10 w-10 bg-slate-500/30">
-                    <Text className="justify-center items-center text-2xl font-bold">+</Text>
-                </Pressable>
-                <Text className="text-lg font-semibold">{item.quantity}</Text>
-                <Pressable className="justify-center items-center rounded-full h-10 w-10 bg-slate-500/30">
-                    <Text className="justify-center items-center text-2xl font-bold">-</Text>
-                </Pressable>
+            <View className="flex-row justify-center items-center">
+                <FontAwesome
+                    //   onPress={() => updateQuantity(cartItem.id, 1)}
+                    name="minus"
+                    color="gray"
+                    className="bg-slate-400/25 rounded-full p-3 aspect-square"
+                />
+                <Text className="text-lg font-semibold px-3">{item.quantity}</Text>
+                <FontAwesome
+                    //   onPress={() => updateQuantity(cartItem.id, 1)}
+                    name="plus"
+                    color="gray"
+                    className="bg-slate-400/25 rounded-full p-3 aspect-square"
+                />
             </View>
         </View>
     );
