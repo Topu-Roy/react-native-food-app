@@ -12,9 +12,10 @@ type CartListItemPropsType = {
 };
 
 const CartListItem = ({ item }: CartListItemPropsType) => {
+    const { updateQuantity } = useCart();
     const { product } = item;
     return (
-        <View className="flex-row px-2 items-center rounded-xl bg-white py-2">
+        <View className="flex-row px-2 items-center rounded-2xl bg-white py-2">
             <Image
                 source={{ uri: product.image || defaultImage }}
                 style={style.cart_list_item_image}
@@ -30,14 +31,14 @@ const CartListItem = ({ item }: CartListItemPropsType) => {
             </View>
             <View className="flex-row justify-center items-center">
                 <FontAwesome
-                    //   onPress={() => updateQuantity(cartItem.id, 1)}
+                    onPress={() => updateQuantity(item.id, -1)}
                     name="minus"
                     color="gray"
                     className="bg-slate-400/25 rounded-full p-3 aspect-square"
                 />
                 <Text className="text-lg font-semibold px-3">{item.quantity}</Text>
                 <FontAwesome
-                    //   onPress={() => updateQuantity(cartItem.id, 1)}
+                    onPress={() => updateQuantity(item.id, 1)}
                     name="plus"
                     color="gray"
                     className="bg-slate-400/25 rounded-full p-3 aspect-square"
