@@ -5,11 +5,13 @@ import { randomUUID } from "expo-crypto";
 
 type CartType = {
     items: CartItemType[],
+    totalPrice: number
     addItem: (item: Product, size: CartItemType['size']) => void;
     updateQuantity: (id: string, amount: 1 | -1) => void,
 }
 export const cartContext = createContext<CartType>({
     items: [],
+    totalPrice: 0,
     addItem: () => { },
     updateQuantity: () => { },
 })
@@ -52,8 +54,11 @@ export default function CartProvider({ children }: PropsWithChildren) {
 
     }
 
+    //* Calculating the sum for all items in the cart
+    const totalPrice = items.reduce((sum, item) => sum + item.product.price, 0)
+
     return (
-        <cartContext.Provider value={{ items, addItem, updateQuantity }}>
+        <cartContext.Provider value={{ items, totalPrice, addItem, updateQuantity }}>
             {children}
         </cartContext.Provider>
     )
