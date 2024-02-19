@@ -17,6 +17,15 @@ export const cartContext = createContext<CartType>({
 export default function CartProvider({ children }: PropsWithChildren) {
     const [items, setItems] = useState<CartItemType[]>([])
     const addItem = (item: Product, size: CartItemType['size']) => {
+
+        //* Check if the item is already added with the same size
+        const existingItem = items.find(a => a.product === item && a.size === size);
+
+        if (existingItem) {
+            updateQuantity(existingItem.id, 1);
+            return
+        }
+
         const newCartItem: CartItemType = {
             id: randomUUID(),
             product: item,
