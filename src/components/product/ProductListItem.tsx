@@ -1,4 +1,4 @@
-import { Link } from "expo-router";
+import { Link, useSegments } from "expo-router";
 import { Image, Pressable, StyleSheet, Text } from "react-native";
 
 type ProductListItemType = {
@@ -13,8 +13,10 @@ type ProductListItemType = {
 export const defaultImage = "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/default.png"
 
 export default function ProductListItem({ product }: ProductListItemType) {
+    const segments = useSegments()
     return (
-        <Link href={`/menu/${product.id}`} asChild>
+        // @ts-ignore
+        <Link href={`${segments[0]}/menu/${product.id}`} asChild>
             <Pressable className='flex-1 max-w-[50%] bg-white dark:bg-neutral-900/95 rounded-md p-1'>
                 <Image source={{ uri: product.image || defaultImage }} style={styles.image} resizeMode="contain" />
                 <Text className='text-base font-bold dark:text-white' >{product.name}</Text>
