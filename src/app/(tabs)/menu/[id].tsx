@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
-import { Stack, useLocalSearchParams } from 'expo-router'
+import { Stack, router, useLocalSearchParams } from 'expo-router'
 import products from '@/assets/data/products';
 import { defaultImage } from '@/src/components/product/ProductListItem';
 import { PizzaSizes, Product } from '@/src/types/types';
@@ -25,6 +25,7 @@ const ProductDetailsScreen = () => {
 
     function addToCart(product: Product, size: PizzaSizes) {
         addItem(product, size)
+        router.push('/cart')
     }
 
     return (
@@ -54,7 +55,7 @@ const ProductDetailsScreen = () => {
                     <Text className='text-2xl font-extrabold text-blue-700'>${product.price}</Text>
                 </View>
                 <Pressable
-                    onPress={() => addItem(product, selectedSize)}
+                    onPress={() => addToCart(product, selectedSize)}
                     className='justify-center items-center h-14 bg-teal-400 rounded-full'
                 >
                     <Text className='text-lg font-medium'>
