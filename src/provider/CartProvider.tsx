@@ -31,10 +31,15 @@ export default function CartProvider({ children }: PropsWithChildren) {
 
     const updateQuantity = (id: string, amount: 1 | -1) => {
 
-        setItems(items.map((item) => {
-            if (item.id === id) return { ...item, quantity: item.quantity + amount }
-            else return item
-        }));
+        setItems(
+            items
+                .map((item) => {
+                    //* Updating the quantity
+                    if (item.id === id) return { ...item, quantity: item.quantity + amount }
+                    else return item
+                })
+                .filter(item => item.quantity > 0) //* Delete an item if quantity is > 0
+        );
 
     }
 
